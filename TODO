@@ -1,0 +1,4 @@
+TODO for v1.0
+Add testcases
+Complete documentation
+Add fetaure to have a field hold a length of another field. Already implemented for Lists, need it for simple types.
