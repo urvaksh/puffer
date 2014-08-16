@@ -1,4 +1,12 @@
 TODO for v1.0
-Add testcases
+Add test cases
 Complete documentation
-Add fetaure to have a field hold a length of another field. Already implemented for Lists, need it for simple types.
+
+
+TODO for v1.1
+Add feature to have a field hold a length of another field. Already implemented for Lists, need it for simple types.
+Replace java util logging with SLF4J
+
+TODO v1.2
+Allow mapping without extending AbstractPacket
+

@@ -10,6 +10,7 @@ import com.codeaspect.puffer.annotations.PacketList;
 import com.codeaspect.puffer.annotations.PacketMessage;
 import com.codeaspect.puffer.cache.Cache;
 import com.codeaspect.puffer.cache.MapCache;
+import com.codeaspect.puffer.exceptions.PufferException;
 import com.codeaspect.puffer.packet.AbstractPacket;
 
 public class DiscriminatorHelper {
@@ -44,7 +45,7 @@ public class DiscriminatorHelper {
 			Class<T> resolvedCalzz = resolveClass(clazz, packet);
 			return resolvedCalzz.newInstance();
 		} catch (Exception e) {
-			throw new RuntimeException("Unable to create instance of class "
+			throw new PufferException("Unable to create instance of class "
 					+ clazz.getName(), e);
 		}
 	}
@@ -101,7 +102,7 @@ public class DiscriminatorHelper {
 			}
 		}
 		
-		throw new RuntimeException(String.format("Field %s not found in class %s", fieldName, clazz.getCanonicalName()));
+		throw new PufferException(String.format("Field %s not found in class %s", fieldName, clazz.getCanonicalName()));
 	}
 
 	private static class FieldLocation {

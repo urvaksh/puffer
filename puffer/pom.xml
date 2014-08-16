@@ -4,8 +4,8 @@
 	<groupId>com.codeaspect</groupId>
 	<artifactId>puffer</artifactId>
 	<version>0.9</version>
-	<name>Object Mapper</name>
-	<description>Object Mapper - Map fixed length messages to Objects</description>
+	<name>pUFFEr - Object Mapper</name>
+	<description>pUFFEr : A framework to allow conversions between fixed length messages and objects</description>
 	<dependencies>
 		<dependency>
 			<groupId>commons-lang</groupId>

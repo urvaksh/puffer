@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.codeaspect.puffer.exceptions.ReflectionException;
+
 public class ObjectReflection {
 	
 	private static Logger LOG = Logger.getLogger(ObjectReflection.class.getName()); 
@@ -35,7 +37,7 @@ public class ObjectReflection {
 				fld.set(delegate,value);
 				return;
 			} catch (Exception e) {
-				throw new RuntimeException(makeErrorMessage("Unable to set value of", fld),e);
+				throw new ReflectionException(makeErrorMessage("Unable to set value of", fld),e);
 			}
 		}else{
 			String setterMethodName = "set" + StringUtils.capitalize(fld.getName());
@@ -46,7 +48,7 @@ public class ObjectReflection {
 				//Do nothing, skip to attempt direct field access
 				LOG.log(Level.WARNING, String.format("No Setter for non accessable field %s. Attempting direct field access",fld.getName()));
 			}catch(Exception e){
-				throw new RuntimeException(makeErrorMessage("Unable to invoke setter on field", fld));
+				throw new ReflectionException(makeErrorMessage("Unable to invoke setter on field", fld));
 			}
 			
 			//Direct Field access
@@ -54,7 +56,7 @@ public class ObjectReflection {
 				fld.setAccessible(true);
 				fld.set(delegate, value);
 			} catch (Exception e) {
-				throw new RuntimeException(makeErrorMessage("Unable to directly set value in ", fld),e);
+				throw new ReflectionException(makeErrorMessage("Unable to directly set value in ", fld),e);
 			}
 		}
 	}
@@ -64,7 +66,7 @@ public class ObjectReflection {
 			try {
 				return fld.get(delegate);
 			} catch (Exception e) {
-				throw new RuntimeException(makeErrorMessage("Unable to set value of", fld),e);
+				throw new ReflectionException(makeErrorMessage("Unable to set value of", fld),e);
 			}
 		}else{
 			String getterMethodName = "get" + StringUtils.capitalize(fld.getName());
@@ -75,7 +77,7 @@ public class ObjectReflection {
 				//Do nothing, skip to attempt direct field access
 				LOG.log(Level.WARNING, "No getter for non accessable field. Attempting direct field access");
 			}catch(Exception e){
-				throw new RuntimeException(makeErrorMessage("Unable to invoke getter on field", fld));
+				throw new ReflectionException(makeErrorMessage("Unable to invoke getter on field", fld));
 			}
 			
 			//Direct Field access
@@ -83,18 +85,22 @@ public class ObjectReflection {
 				fld.setAccessible(true);
 				return fld.get(delegate);
 			} catch (Exception e) {
-				throw new RuntimeException(makeErrorMessage("Unable to directly get value from ", fld),e);
+				throw new ReflectionException(makeErrorMessage("Unable to directly get value from ", fld),e);
 			}
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		return delegate.hashCode();
 	}
-
 	
-	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -110,11 +116,5 @@ public class ObjectReflection {
 		} else if (!delegate.equals(other.delegate))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
 	}
 }

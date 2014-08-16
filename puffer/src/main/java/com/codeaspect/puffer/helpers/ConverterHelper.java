@@ -7,6 +7,7 @@ import java.util.Map;
 import com.codeaspect.puffer.annotations.PacketMessage;
 import com.codeaspect.puffer.converters.Converter;
 import com.codeaspect.puffer.converters.SingeltonConverter;
+import com.codeaspect.puffer.exceptions.PufferException;
 
 public class ConverterHelper {
 	
@@ -27,7 +28,7 @@ public class ConverterHelper {
 			}
 			return converter;
 		}catch(Exception e){
-			throw new RuntimeException("Unable to create converter",e);
+			throw new PufferException("Unable to create converter",e);
 		}
 	} 
 	

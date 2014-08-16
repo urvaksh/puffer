@@ -6,6 +6,8 @@ import java.math.BigInteger;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.codeaspect.puffer.exceptions.PufferException;
+
 public class NumberConverter implements SingeltonConverter<Number> {
 
 	protected boolean checkFieldType(Field field, Class<?> clazz) {
@@ -36,10 +38,10 @@ public class NumberConverter implements SingeltonConverter<Number> {
 			else if(checkFieldType(field, BigInteger.class))
 				return new BigInteger(message);
 			else
-				throw new RuntimeException("Unknown Number subclass, please create a custom Converter for "+field.getType().getCanonicalName());
+				throw new PufferException("Unknown Number subclass, please create a custom Converter for "+field.getType().getCanonicalName());
 			
 		}catch(NumberFormatException ex){
-			throw new RuntimeException(String.format("Error formatting %s.%s as a number",field.getDeclaringClass().getCanonicalName(),field.getName()),ex);
+			throw new PufferException(String.format("Error formatting %s.%s as a number",field.getDeclaringClass().getCanonicalName(),field.getName()),ex);
 		}
 	}
 

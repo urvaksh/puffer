@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.codeaspect.puffer.exceptions.PufferException;
 import com.codeaspect.puffer.packet.AbstractPacket;
 
 public class DefaultConverter implements SingeltonConverter<Object> {
@@ -28,7 +29,7 @@ public class DefaultConverter implements SingeltonConverter<Object> {
 				return (Converter<Object>) converters.get(superClazz);
 			superClazz = superClazz.getSuperclass();
 		}
-		throw new RuntimeException(
+		throw new PufferException(
 				String.format(
 						"Unable to convert the field %s, please use a Custom Converter",
 						clazz.getCanonicalName()));

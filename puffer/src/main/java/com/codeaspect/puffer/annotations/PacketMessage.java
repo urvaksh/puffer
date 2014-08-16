@@ -61,7 +61,7 @@ public @interface PacketMessage {
 	public Class<? extends Converter<?>> converter() default DefaultConverter.class;
 
 	/**
-	 * The {@see com.codeaspect.puffer.enums.NumericSign} in case of a {@link java.lang.Number}
+	 * The {@link com.codeaspect.puffer.enums.NumericSign} in case of a {@link java.lang.Number}
 	 */
 	public NumericSign numericSign() default NumericSign.DEFAULT;
 }

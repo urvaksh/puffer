@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.codeaspect.puffer.annotations.PacketList;
 import com.codeaspect.puffer.annotations.PacketMessage;
+import com.codeaspect.puffer.exceptions.PufferException;
 import com.codeaspect.puffer.packet.AbstractPacket;
 
 public class MessageListParser {
@@ -49,7 +50,7 @@ public class MessageListParser {
 				packetCount = Integer.parseInt(reflection.getFieldValue(
 						packetCountField).toString());
 			} catch (NumberFormatException e) {
-				throw new RuntimeException(
+				throw new PufferException(
 						"The field specified in @PacketList.packetCountField does not contain a valid numeric value");
 			}
 		} else if (fields.indexOf(fld) == fields.size() - 1) {// Last
@@ -57,7 +58,7 @@ public class MessageListParser {
 					.getAnnotation(PacketMessage.class);
 			packetCount = (packet.length() - start) / packetMessage.length();
 		} else {
-			throw new RuntimeException(
+			throw new PufferException(
 					"@PacketList must ddefine attributes packetCount, packetCountField or be the last @PacketMessage annotated field in the class");
 		}
 
@@ -84,7 +85,7 @@ public class MessageListParser {
 				packetLength = Integer.parseInt(reflection.getFieldValue(
 						packetLengthField).toString());
 			} catch (NumberFormatException e) {
-				throw new RuntimeException(
+				throw new PufferException(
 						"The field specified in @PacketList.packetLengthField does not contain a valid numeric value");
 			}
 
@@ -106,7 +107,7 @@ public class MessageListParser {
 				return null;
 			}
 		}catch (Exception e){
-			throw new RuntimeException(fld.getName()+" annotated with @PacketList must have generic type List", e);
+			throw new PufferException(fld.getName()+" annotated with @PacketList must have generic type List", e);
 		}
 	}
 	

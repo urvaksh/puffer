@@ -9,6 +9,7 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 
 import com.codeaspect.puffer.annotations.TemporalFormat;
+import com.codeaspect.puffer.exceptions.PufferException;
 
 public class AnnotationBasedDateConverter implements SingeltonConverter<Date>{
 
@@ -39,7 +40,7 @@ public class AnnotationBasedDateConverter implements SingeltonConverter<Date>{
 			return getDateFormat(field).parse(message);
 		}catch(ParseException e){
 			//TODO : Make exception descriptive
-			throw new RuntimeException("Could not parse date with format",e);
+			throw new PufferException("Could not parse date with format",e);
 		}
 	}
 
