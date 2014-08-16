@@ -1,3 +1,8 @@
+/*
+ * pUFFEr : A framework to allow conversions between fixed length messages and objects
+ *
+ * @author urvaksh.rogers
+ */
 package com.codeaspect.puffer.converters;
 
 import java.lang.reflect.Field;
@@ -11,10 +16,22 @@ import org.apache.commons.lang.StringUtils;
 import com.codeaspect.puffer.annotations.TemporalFormat;
 import com.codeaspect.puffer.exceptions.PufferException;
 
+/**
+ * The Class AnnotationBasedDateConverter is a {@link com.codeaspect.puffer.converters.Converter<Date>} that converts between Strings and Dates.<br />
+ * It uses the @{@link com.codeaspect.puffer.annotations.TemporalFormat} annotation to deduce the format of the Date.<br />
+ * If no annotation is placed the default format is YYmmDD<br />
+ */
 public class AnnotationBasedDateConverter implements SingeltonConverter<Date>{
 
+	/** The default date format. */
 	private static String DEFAULT_DATE_FORMAT = "YYmmDD";
 	
+	/**
+	 * Gets the date format.
+	 *
+	 * @param fld the fld
+	 * @return the date format
+	 */
 	private DateFormat getDateFormat(Field fld){
 		String formatString = DEFAULT_DATE_FORMAT;
 		TemporalFormat format = fld.getAnnotation(TemporalFormat.class);
@@ -25,6 +42,9 @@ public class AnnotationBasedDateConverter implements SingeltonConverter<Date>{
 	} 
 	
 	
+	/* (non-Javadoc)
+	 * @see com.codeaspect.puffer.converters.Converter#hydrate(java.lang.reflect.Field, java.lang.String)
+	 */
 	public Date hydrate(Field field, String message) {
 		// For dates with all 0000s
 		try{
@@ -44,6 +64,9 @@ public class AnnotationBasedDateConverter implements SingeltonConverter<Date>{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.codeaspect.puffer.converters.Converter#stringify(java.lang.reflect.Field, java.lang.Object)
+	 */
 	public String stringify(Field field, Date entity) {
 		if(entity==null || entity.getTime()==0){
 			TemporalFormat format = field.getAnnotation(TemporalFormat.class);

@@ -37,31 +37,32 @@ public class AbstractPacket {
 		List<Field> fields = FieldMetadataHelper.getOrderedFieldList(clazz);
 		MessageListParser listParser = new MessageListParser(this, packet);
 		ObjectReflection reflection = new ObjectReflection(this);
-		int start = 0;
+		int location = 0;
 
 		for (Field fld : fields) {
 			PacketMessage packetMessage = fld.getAnnotation(PacketMessage.class);
 
 			if (fld.isAnnotationPresent(PacketList.class)) {
-				List<? super AbstractPacket> list = listParser.parseList(fld, start);
+				List<? super AbstractPacket> list = listParser.parseList(fld, location);
 				reflection.setFieldValue(fld, list);
+				location=listParser.getCurrentLocation();
 			} else if (AbstractPacket.class.isAssignableFrom(fld.getType())) {
 
 				@SuppressWarnings("unchecked")
 				// Safe cast since the isAssignableFrom check is passed
 				Class<? extends AbstractPacket> fieldClazz = (Class<? extends AbstractPacket>) fld.getType();
 
-				AbstractPacket component = DiscriminatorHelper.getConcreteObject(fieldClazz, packet.substring(start));
+				AbstractPacket component = DiscriminatorHelper.getConcreteObject(fieldClazz, packet.substring(location));
 				int packetSize = DiscriminatorHelper.getPacketLength(fieldClazz);
 
-				component.parse(packet.substring(start, start + packetSize));
+				component.parse(packet.substring(location, location + packetSize));
 				reflection.setFieldValue(fld, component);
-				start += packetSize;
+				location += packetSize;
 			} else {
-				String fldStringValue = packet.substring(start, start + packetMessage.length());
+				String fldStringValue = packet.substring(location, location + packetMessage.length());
 				Object value = ConverterHelper.hydrate(fld, fldStringValue);
 				reflection.setFieldValue(fld, value);
-				start += packetMessage.length();
+				location += packetMessage.length();
 			}
 		}
 	}

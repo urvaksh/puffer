@@ -20,6 +20,7 @@ public class MessageListParser {
 	private String packet;
 	private List<Field> fields;
 	private ObjectReflection reflection;
+	private int currentLocation;
 
 	public MessageListParser(AbstractPacket baseObject, String packet) {
 		super();
@@ -112,20 +113,27 @@ public class MessageListParser {
 	}
 	
 	public <T extends AbstractPacket> List<T> parseList(Field fld, int start){
-		int listSize = findListCount(fld, start);
-		int packetLength = findPacketLength(fld);
-		List<T> lst = new ArrayList<T>();
-		
-		for(int listIndex=0; listIndex<listSize; listIndex++){
-			String packetStringValue = packet.substring(start, start+packetLength);
-			Class<T> listItemClass = getListItemClass(fld);
-			T listItem = AbstractPacket.parse(listItemClass, packetStringValue);
+		synchronized(baseObject){
+			int listSize = findListCount(fld, start);
+			int packetLength = findPacketLength(fld);
+			List<T> lst = new ArrayList<T>();
+			this.currentLocation=start;
 			
-			start+=packetLength;
-			lst.add(listItem);
+			for(int listIndex=0; listIndex<listSize; listIndex++){
+				String packetStringValue = packet.substring(start, start+packetLength);
+				Class<T> listItemClass = getListItemClass(fld);
+				T listItem = AbstractPacket.parse(listItemClass, packetStringValue);
+				
+				this.currentLocation+=packetLength;
+				lst.add(listItem);
+			}
+			
+			return lst;
 		}
-		
-		return lst;
+	}
+
+	public int getCurrentLocation() {
+		return currentLocation;
 	}
 
 	@Override
