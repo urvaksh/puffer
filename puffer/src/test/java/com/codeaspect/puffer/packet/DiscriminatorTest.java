@@ -135,7 +135,9 @@ public class DiscriminatorTest {
 		assertEquals("xyz", der.fld1);
 		assertEquals(Boolean.FALSE, der.val);
 		
-		assertEquals("Five Hundred", ((ReDerived2)der).desc.trim());
+		ReDerived2 rederived = (ReDerived2)der;
+		
+		assertEquals("Five Hundred", rederived.desc.trim());
 		
 	}
 
