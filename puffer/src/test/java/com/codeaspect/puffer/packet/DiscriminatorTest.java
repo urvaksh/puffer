@@ -84,7 +84,7 @@ public class DiscriminatorTest {
 		Calendar cal = Calendar.getInstance();
 		cal.clear();
 		cal.set(Calendar.DATE, date);
-		cal.set(Calendar.MONTH, month);
+		cal.set(Calendar.MONTH, month-1);
 		cal.set(Calendar.YEAR, year);
 		return cal.getTime();
 	}
@@ -101,7 +101,7 @@ public class DiscriminatorTest {
 		assertEquals("----", der.dummy);
 		assertEquals("ABC", der.fld1);
 		assertEquals(Boolean.TRUE, der.val);
-		assertEquals(createDate(15,7,2014), der.date);
+		assertEquals(createDate(15,8,2014), der.date);
 		
 	}
 	

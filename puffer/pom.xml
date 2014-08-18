@@ -23,20 +23,26 @@
 			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
+		</dependency>
+
 
 	</dependencies>
 	<reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9.1</version>
-        <configuration>
-          <!--<stylesheetfile>${basedir}/src/main/javadoc/stylesheet.css</stylesheetfile>-->
-          <show>public</show>
-        </configuration>
-      </plugin>
-    </plugins>
-  </reporting>
-	
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<configuration>
+					<!--<stylesheetfile>${basedir}/src/main/javadoc/stylesheet.css</stylesheetfile> -->
+					<show>public</show>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+
 </project>

@@ -29,7 +29,7 @@ public class AbstractPacketConverter implements SingeltonConverter<AbstractPacke
 	 * @see com.codeaspect.puffer.converters.Converter#stringify(java.lang.reflect.Field, java.lang.Object)
 	 */
 	public String stringify(Field field, AbstractPacket message) {
-		return message.toString();
+		return message.stringify();
 	}
 
 }

@@ -19,7 +19,7 @@ import com.codeaspect.puffer.helpers.FieldMetadataHelper;
 import com.codeaspect.puffer.helpers.MessageListParser;
 import com.codeaspect.puffer.helpers.ObjectReflection;
 
-public class AbstractPacket {
+public abstract class AbstractPacket {
 
 	/**
 	 * Parses the fixed length packet to the current object based on the
@@ -105,8 +105,8 @@ public class AbstractPacket {
 	 * {@link com.codeaspect.puffer.annotations.PacketMessage} and {@link com.codeaspect.puffer.annotations.PacketList}
 	 * annotations
 	 */
-	@Override
-	public String toString() {
+	
+	public String stringify() {
 		StringBuilder packetBuilder = new StringBuilder();
 		ObjectReflection reflection = new ObjectReflection(this);
 
