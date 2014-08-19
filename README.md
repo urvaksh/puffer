@@ -17,6 +17,7 @@ Simple Example
 For the class:
 
 class OrderDetail extends AbstractPacket{
+
 	@PacketMessage(position=1, length=10)
 	private String name;
 	
@@ -24,7 +25,7 @@ class OrderDetail extends AbstractPacket{
 	@TemporalFormat("ddMMyyyy")
 	private Date date;
 	
-	@PacketMessage(position=1, length=5)
+	@PacketMessage(position=3, length=5)
 	private Long amount;
 }
 
@@ -49,12 +50,20 @@ Although all the basic conversions are handeled, users can create their own Conv
 Example: The fixed length field contains an amount, which maps to a Double, however in the message there are no decimal points, the last two digits are considered to be the decimals. In this case a developer would write their own converter:
 
 public class AmountConverter implements Converter<Double> {
-	private Converter<Number> delegate = new NumberConverter();//Provided by framework
+
+	//Provided by framework
+	private Converter<Number> delegate = new NumberConverter();
 	
 	@Override
-	public Number hydrate(Field field, String message) {
-		Double value = (Double)delegate.hydrate(field,message);//Cast to Double since the field object identifies it as a Double
+	public Double hydrate(Field field, String message) {
+		//Cast to Double since the field object identifies it as a Double
+		Double value = (Double)delegate.hydrate(field,message);
 		return value/100; //Divide by hundred to move the decimal
+	}
+	
+	@Override
+	public String stringify(Field field, Double entity) {
+		return delegate.stringify(field, entity*100);
 	}
 
 }
@@ -62,6 +71,7 @@ public class AmountConverter implements Converter<Double> {
 and now in the class:
 
 class OrderDetail extends AbstractPacket{
+
 	@PacketMessage(position=1, length=10)
 	private String name;
 	
@@ -69,8 +79,9 @@ class OrderDetail extends AbstractPacket{
 	@TemporalFormat("ddMMyyyy")
 	private Date date;
 	
-	@PacketMessage(position=1, length=5, converter=AmountConverter.class)
+	@PacketMessage(position=3, length=5, converter=AmountConverter.class)
 	private Double amount;
+	
 }
 
 Discriminator
