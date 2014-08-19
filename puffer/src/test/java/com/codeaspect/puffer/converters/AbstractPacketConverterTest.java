@@ -3,7 +3,6 @@ package com.codeaspect.puffer.converters;
 import java.lang.reflect.Field;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 

@@ -10,6 +10,7 @@ import org.junit.Test;
 
 public class NumberConverterTest {
 
+	@SuppressWarnings("unused")
 	private static class TestClass {
 		private Integer intFld;
 		private Long longFld;
