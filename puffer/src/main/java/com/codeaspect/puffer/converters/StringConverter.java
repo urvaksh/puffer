@@ -29,7 +29,7 @@ public class StringConverter implements SingeltonConverter<String> {
 	public String stringify(Field field, String message) {
 		PacketMessage msg = field.getAnnotation(PacketMessage.class);
 		int allowedLength = msg.length();
-		if(StringUtils.isEmpty(message) && message.length()>allowedLength){
+		if(!StringUtils.isEmpty(message) && message.length()>allowedLength){
 			return message.substring(0, allowedLength);
 		}else{
 			return message==null?"":message;

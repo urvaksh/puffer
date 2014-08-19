@@ -38,8 +38,9 @@ public class BooleanConverter implements SingeltonConverter<Boolean> {
 	 * @see com.codeaspect.puffer.converters.Converter#stringify(java.lang.reflect.Field, java.lang.Object)
 	 */
 	public String stringify(Field field, Boolean message) {
-		// TODO Auto-generated method stub
-		return null;
+		return message ? 
+				BooleanHelper.getTrueValue(field) : 
+					BooleanHelper.getFalseValue(field);
 	}
 
 	
