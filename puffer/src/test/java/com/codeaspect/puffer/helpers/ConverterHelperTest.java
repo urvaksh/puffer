@@ -16,6 +16,7 @@ import com.codeaspect.puffer.converters.Converter;
 import com.codeaspect.puffer.converters.SingeltonConverter;
 import com.codeaspect.puffer.enums.NumericSign;
 import com.codeaspect.puffer.enums.Side;
+import com.codeaspect.puffer.testutils.TestUtils;
 
 public class ConverterHelperTest {
 
@@ -63,24 +64,16 @@ public class ConverterHelperTest {
 	public void testHydrate_Date() throws NoSuchFieldException, SecurityException {
 		Field field = TestClass.class.getDeclaredField("date");
 		Date value = (Date) ConverterHelper.hydrate(field, "18082014");
-		assertEquals(createDate(18, 8, 2014), value);
+		assertEquals(TestUtils.createDate(18, 8, 2014), value);
 	}
 
 	@Test
 	public void testStringify_Date() throws NoSuchFieldException, SecurityException {
 		Field field = TestClass.class.getDeclaredField("date");
-		String value = ConverterHelper.stringifyAndPad(field, createDate(18, 8, 2014));
+		String value = ConverterHelper.stringifyAndPad(field, TestUtils.createDate(18, 8, 2014));
 		assertEquals("18082014", value);
 	}
 
-	private static Date createDate(int date, int month, int year) {
-		Calendar cal = Calendar.getInstance();
-		cal.clear();
-		cal.set(Calendar.DATE, date);
-		cal.set(Calendar.MONTH, month - 1);
-		cal.set(Calendar.YEAR, year);
-		return cal.getTime();
-	}
 
 	private static class TestClass {
 		@PacketMessage(position = 1, length = 10, numericSign = NumericSign.DEFAULT, padChar = '0', paddingSide = Side.LEFT)

@@ -120,7 +120,7 @@ public class MessageListParser {
 			this.currentLocation=start;
 			
 			for(int listIndex=0; listIndex<listSize; listIndex++){
-				String packetStringValue = packet.substring(start, start+packetLength);
+				String packetStringValue = packet.substring(currentLocation, currentLocation+packetLength);
 				Class<T> listItemClass = getListItemClass(fld);
 				T listItem = AbstractPacket.parse(listItemClass, packetStringValue);
 				

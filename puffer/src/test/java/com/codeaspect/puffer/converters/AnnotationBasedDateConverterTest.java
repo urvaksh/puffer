@@ -12,6 +12,7 @@ import org.junit.Test;
 import com.codeaspect.puffer.annotations.PacketMessage;
 import com.codeaspect.puffer.annotations.TemporalFormat;
 import com.codeaspect.puffer.packet.AbstractPacket;
+import com.codeaspect.puffer.testutils.TestUtils;
 
 public class AnnotationBasedDateConverterTest {
 	
@@ -24,7 +25,7 @@ public class AnnotationBasedDateConverterTest {
 	
 	private Converter<Date> converter = new AnnotationBasedDateConverter();
 	
-	private static final Date TEST_DATE = createDate(18,8,2014);
+	private static final Date TEST_DATE = TestUtils.createDate(18,8,2014);
 	private static final String TEST_STRING = "18-08-2014";
 	
 	@Test
@@ -39,15 +40,6 @@ public class AnnotationBasedDateConverterTest {
 		Field field = TestPacket.class.getDeclaredField("date");
 		String date = converter.stringify(field, TEST_DATE);
 		Assert.assertEquals(TEST_STRING, date);
-	}
-	
-	private static Date createDate(int date, int month, int year){
-		Calendar cal = Calendar.getInstance();
-		cal.clear();
-		cal.set(Calendar.DATE, date);
-		cal.set(Calendar.MONTH, month-1);
-		cal.set(Calendar.YEAR, year);
-		return cal.getTime();
 	}
 
 }

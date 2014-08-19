@@ -134,23 +134,25 @@ In Middle the field subPacket mapped to XYZ, this lead to the target class being
 
 List Mapping
 --------
-Puffer also maps One-to-Many relationships in fixed messages. The restriction being that the Many class must also inherit from PacketMessage.
+Puffer also maps One-to-Many relationships in fixed messages. The restriction being that the Many class must also inherit from AbstractPacket.
 
-public class Message extends PacketMessage{
+public class Message extends AbstractPacket {
 
-	@PacketMessage(length=10, position=1)
+	@PacketMessage(length = 10, position = 1)
 	String details;
-	
-	@PacketMessage(length=1, position=1)
+
+	@PacketMessage(length = 6, position = 2)
 	@PacketList
 	List<InnerMessage> messages;
+	
 }
 
-public class InnerMessage extends PacketMessage{
-	
-	@PacketMessage(length=1, position=1)
+public class InnerMessage extends AbstractPacket {
+
+	@PacketMessage(length = 1, position = 1)
 	private String identifier;
-	
-	@PacketMessage(length=5, position=2)
+
+	@PacketMessage(length = 5, position = 2)
 	private String name;
+	
 }

@@ -3,8 +3,6 @@ package com.codeaspect.puffer.helpers;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Transformer;
 import org.junit.Assert;
 import org.junit.Test;
 
