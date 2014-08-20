@@ -16,6 +16,7 @@ Simple Example
 ----
 For the class:
 
+```Java
 class OrderDetail extends AbstractPacket{
 
 	@PacketMessage(position=1, length=10)
@@ -28,12 +29,14 @@ class OrderDetail extends AbstractPacket{
 	@PacketMessage(position=3, length=5)
 	private Long amount;
 }
+```
 
 
 And a fixed message "Item1     1508201300100"
 
 The conversion is as simple as follows
 
+```Java
 String message = "Item1     1508201300100";
 //Method 1 : Creating a object and calling parse
 OrderDetail detail = new OrderDetail();
@@ -41,6 +44,7 @@ detail.parse(message);
 
 //Method 2: Allowing the framework to create the object (class must have zero-arg constructor)
 OrderDetail detail = AbstractPacket.parse(OrderDetail.class, message);
+```
 
 Custom Converters
 ----
@@ -49,6 +53,7 @@ Although all the basic conversions are handeled, users can create their own Conv
 
 Example: The fixed length field contains an amount, which maps to a Double, however in the message there are no decimal points, the last two digits are considered to be the decimals. In this case a developer would write their own converter:
 
+```Java
 public class AmountConverter implements Converter<Double> {
 
 	//Provided by framework
@@ -67,9 +72,10 @@ public class AmountConverter implements Converter<Double> {
 	}
 
 }
-
+```
 and now in the class:
 
+```Java
 class OrderDetail extends AbstractPacket{
 
 	@PacketMessage(position=1, length=10)
@@ -83,11 +89,13 @@ class OrderDetail extends AbstractPacket{
 	private Double amount;
 	
 }
+```
 
 Discriminator
 -----
 The most powerful feature of puffer is the use of discriminators; it allows developers to use annotations to specify which concrete instance of the object should be created at runtime based on the contents of a message.
 
+```Java
 	@Packet(description = "Packet to test Discriminators")
 	@DiscriminatorField(fieldName = "fld1", 
 		values = { @DiscriminatorValue(fieldValues = {"ABC", "abc" }, targetClass = Derived1.class),
@@ -122,11 +130,15 @@ The most powerful feature of puffer is the use of discriminators; it allows deve
 		@PacketMessage(length=15, position=5)
 		String desc;
 	}
+```
 	
 The following call will yeild an instance of ReDerived2
+
+```Java
 String input = "----xyzNXYZFive Hundred   ";
 AbstractPacket packet= AbstractPacket.parse(Base.class, input);
 System.out.println(packet.getClass().getCannonicalName());//Will give the full name of ReDerived2
+```
 
 This is because Base.fld1 mapped to xyz, which results in the target object being of the type Middle.
 In Middle the field subPacket mapped to XYZ, this lead to the target class being ReDerived2, and since ReDerived2 does not have any discriminators, this was the class whose object was created by the framework.
@@ -136,6 +148,7 @@ List Mapping
 --------
 Puffer also maps One-to-Many relationships in fixed messages. The restriction being that the Many class must also inherit from AbstractPacket.
 
+```Java
 public class Message extends AbstractPacket {
 
 	@PacketMessage(length = 10, position = 1)
@@ -145,8 +158,9 @@ public class Message extends AbstractPacket {
 	@PacketList
 	List<InnerMessage> messages;
 	
-}
+}```
 
+```Java
 public class InnerMessage extends AbstractPacket {
 
 	@PacketMessage(length = 1, position = 1)
@@ -155,4 +169,4 @@ public class InnerMessage extends AbstractPacket {
 	@PacketMessage(length = 5, position = 2)
 	private String name;
 	
-}
+}```
