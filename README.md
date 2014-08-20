@@ -158,7 +158,8 @@ public class Message extends AbstractPacket {
 	@PacketList
 	List<InnerMessage> messages;
 	
-}```
+}
+```
 
 ```Java
 public class InnerMessage extends AbstractPacket {
@@ -169,4 +170,5 @@ public class InnerMessage extends AbstractPacket {
 	@PacketMessage(length = 5, position = 2)
 	private String name;
 	
-}```
+}
+```
