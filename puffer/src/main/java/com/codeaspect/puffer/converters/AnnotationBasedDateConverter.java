@@ -59,8 +59,7 @@ public class AnnotationBasedDateConverter implements SingeltonConverter<Date>{
 		try{
 			return getDateFormat(field).parse(message);
 		}catch(ParseException e){
-			//TODO : Make exception descriptive
-			throw new PufferException("Could not parse date with format",e);
+			throw new PufferException("Could not parse date",e);
 		}
 	}
 
