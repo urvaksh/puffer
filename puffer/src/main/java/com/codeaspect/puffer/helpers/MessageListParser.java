@@ -104,8 +104,7 @@ public class MessageListParser {
 				ParameterizedType pt = (ParameterizedType) fld.getGenericType();
 				return (Class<T>)pt.getActualTypeArguments()[0];
 			}else{
-				//TODO: Replace with Exception
-				return null;
+				throw new PufferException("The field must have a generic type.\nUse List<Entity> not a raw List");
 			}
 		}catch (Exception e){
 			throw new PufferException(fld.getName()+" annotated with @PacketList must have generic type List", e);

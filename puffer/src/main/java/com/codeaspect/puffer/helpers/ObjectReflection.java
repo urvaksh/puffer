@@ -1,3 +1,8 @@
+/*
+ * pUFFEr : A framework to allow conversions between fixed length messages and objects
+ *
+ * @author urvaksh.rogers
+ */
 package com.codeaspect.puffer.helpers;
 
 import java.lang.reflect.Field;
@@ -9,12 +14,22 @@ import org.apache.commons.lang.StringUtils;
 
 import com.codeaspect.puffer.exceptions.ReflectionException;
 
+/**
+ * The Class ObjectReflection provides an easy way to perform reflective calls on onjects.
+ */
 public class ObjectReflection {
 	
+	/** The log. */
 	private static Logger LOG = Logger.getLogger(ObjectReflection.class.getName()); 
 
+	/** The delegate object on which the reflection calls will be performed. */
 	private Object delegate;
 
+	/**
+	 * Instantiates a new ObjectReflection.
+	 *
+	 * @param delegate the delegate
+	 */
 	public ObjectReflection(Object delegate) {
 		this.delegate = delegate;
 	}
@@ -31,6 +46,12 @@ public class ObjectReflection {
 		return builder.toString();
 	}
 	
+	/**
+	 * Sets the field value.
+	 *
+	 * @param fld the field
+	 * @param value the value
+	 */
 	public void setFieldValue(Field fld, Object value){
 		if(fld.isAccessible()){
 			try {
@@ -61,6 +82,12 @@ public class ObjectReflection {
 		}
 	}
 	
+	/**
+	 * Gets the field value.
+	 *
+	 * @param fld the field
+	 * @return the field value
+	 */
 	public Object getFieldValue(Field fld){
 		if(fld.isAccessible()){
 			try {
