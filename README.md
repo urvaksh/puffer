@@ -5,16 +5,13 @@ pUFFEr : A framework to allow conversions between fixed length messages and obje
 
 Puffer allows conversion of fixed length messages to Objects in a declarative manner, the developer only has to use annotations and the framework takes care of the rest.
 
-Puffer offers the following features
+Puffer offers the following features:
+
 * Offers out f the box type conversion for all basic java types and the framework allows creation of Custom Type converters for types that are not intrinsically supported.
 * Out of the box padding for fixed length messages, the framework allows the programmer to specify the padding character and padding side for any given field.
 * Declaratively handles conversion of Numbers (with different notations for negative and positive numbers)
 * Automatically handles the mapping of message segments (a list of segment where the number of segments is not fixed) to java Lists.
 * Allows Inheritance mapping and runtime discovery of which concrete class messages should be mapped to by using field discriminators. This applies not only to the top level class but also to mapped component Messages and mapped List Segments allowing a great deal of flexibility.
-* Type conversion is seamless for all basic java types and the framework allows creation of Custom Type converters for types that are not supported out of the box.
-* Out of the box padding for fixed length messages, the framework allows the programmer to specify the padding character and padding side for any given field.
-* Automatically handles the mapping of message segments (a list of segment where the number of segments is not fixed) to java Lists.
-* Allows Inheritance mapping and runtime discovery of which concrete class messages should be mapped to by using field discriminators.
 
 
 
@@ -97,6 +94,54 @@ class OrderDetail extends AbstractPacket{
 }
 ```
 
+Component and List Mapping
+--------
+Puffer also maps One-to-One and One-to-Many relationships in fixed messages. The restriction being that all mapped classes using the pUFFEr annotations should inherit from AbstractPacket.
+
+```Java
+public class InnerMessage extends AbstractPacket {
+
+	@PacketMessage(length = 1, position = 1)
+	private String identifier;
+
+	@PacketMessage(length = 5, position = 2)
+	private String name;
+	
+}
+```
+
+```Java
+public class ComponentMessage extends AbstractPacket {
+
+	@PacketMessage(length = 3, position = 1)
+	private String identifier;
+
+	@PacketMessage(length = 5, position = 2)
+	private Long amount;
+	
+}
+```
+
+```Java
+public class Message extends AbstractPacket {
+
+	@PacketMessage(length = 10, position = 1)
+	String details;
+	
+	/*Example of Component mapping*/
+	@PacketMessage(length = 10, position = 2)	
+	ComponentMessage component;
+
+    /*Example of List mapping*/
+	@PacketMessage(length = 6, position = 3)
+	@PacketList
+	List<InnerMessage> messages;
+	
+}
+```
+
+
+
 Discriminator
 -----
 The most powerful feature of puffer is the use of discriminators; it allows developers to use annotations to specify which concrete instance of the object should be created at runtime based on the contents of a message.
@@ -149,35 +194,6 @@ System.out.println(packet.getClass().getCannonicalName());//Will give the full n
 This is because Base.fld1 mapped to xyz, which results in the target object being of the type Middle.
 In Middle the field subPacket mapped to XYZ, this lead to the target class being ReDerived2, and since ReDerived2 does not have any discriminators, this was the class whose object was created by the framework.
 
-
-List Mapping
---------
-Puffer also maps One-to-Many relationships in fixed messages. The restriction being that the Many class must also inherit from AbstractPacket.
-
-```Java
-public class Message extends AbstractPacket {
-
-	@PacketMessage(length = 10, position = 1)
-	String details;
-
-	@PacketMessage(length = 6, position = 2)
-	@PacketList
-	List<InnerMessage> messages;
-	
-}
-```
-
-```Java
-public class InnerMessage extends AbstractPacket {
-
-	@PacketMessage(length = 1, position = 1)
-	private String identifier;
-
-	@PacketMessage(length = 5, position = 2)
-	private String name;
-	
-}
-```
 
 More Examples
 -----------  
