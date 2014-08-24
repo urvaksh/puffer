@@ -19,12 +19,14 @@ import java.lang.annotation.Target;
 public @interface PacketList {
 
 	/**
-	 * The number of Packets.
+	 * The number of Packets in the list.
+	 * Leave blank is specifying packetCountField or the List is the last fieldin the message
 	 */
 	public int packetCount() default -1;
 	
 	/**
-	 * The field specifying the number of packets.
+	 * The field specifying the number of packets in the list.
+	 * Leave blank is specifying packetCount or the List is the last fieldin the message
 	 */
 	public String packetCountField() default "";
 	

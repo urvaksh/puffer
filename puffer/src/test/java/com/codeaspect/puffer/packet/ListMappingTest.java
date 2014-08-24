@@ -16,8 +16,8 @@ public class ListMappingTest {
 		@PacketMessage(length = 10, position = 1)
 		String details;
 
-		@PacketMessage(length=6, position = 2)
-		@PacketList(packetLength=6)
+		@PacketMessage(position = 2, length=6)
+		@PacketList
 		List<InnerMessage> messages;
 	}
 

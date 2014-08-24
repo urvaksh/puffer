@@ -1,10 +1,5 @@
-TODO for v1.0
-Change com.codeaspect.puffer.helpers.DiscriminatorHelper.getPacketLength(Class<? extends AbstractPacket>) to accommodate variable length fields based on the message
-Add test cases
-Complete documentation
-
-
 TODO for v1.1
+Change DiscriminatorHelper.getPacketLength(Class<? extends AbstractPacket>) to accommodate variable length fields based on the message
 Add feature to have a field hold a length of another field. Already implemented for Lists, need it for simple types.
 Replace java util logging with SLF4J
 

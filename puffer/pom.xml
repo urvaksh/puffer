@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.codeaspect</groupId>
 	<artifactId>puffer</artifactId>
-	<version>0.9</version>
+	<version>1.0</version>
 	<name>pUFFEr - Object Mapper</name>
 	<description>pUFFEr : A framework to allow conversions between fixed length messages and objects</description>
 	<dependencies>
