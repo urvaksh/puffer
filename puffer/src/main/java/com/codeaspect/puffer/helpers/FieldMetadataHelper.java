@@ -74,8 +74,8 @@ public class FieldMetadataHelper {
 			return fieldCache.get(clazz);
 		}else{
 			List<Field> orderedList = createOrderedFieldList(clazz);
-			if(fieldCache!=null){
-				synchronized (clazz) {
+			synchronized (clazz) {
+				if(fieldCache!=null){
 					fieldCache.put(clazz, orderedList);
 				}
 			}
