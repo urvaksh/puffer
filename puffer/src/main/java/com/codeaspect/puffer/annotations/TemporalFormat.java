@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
 public @interface TemporalFormat {
 	
 	/**
-	 * The date format as specifed in {@link java.text.DateFormat}.
+	 * The date format as specified in {@link java.text.DateFormat}.
 	 */
 	public String value();
 }
