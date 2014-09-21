@@ -7,10 +7,10 @@ package com.codeaspect.puffer.helpers;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.codeaspect.puffer.exceptions.ReflectionException;
 
@@ -20,7 +20,8 @@ import com.codeaspect.puffer.exceptions.ReflectionException;
 public class ObjectReflection {
 	
 	/** The log. */
-	private static Logger LOG = Logger.getLogger(ObjectReflection.class.getName()); 
+	//private static Logger LOG = Logger.getLogger(ObjectReflection.class.getName()); 
+	final static Logger LOG = LoggerFactory.getLogger(ObjectReflection.class);
 
 	/** The delegate object on which the reflection calls will be performed. */
 	private Object delegate;
@@ -67,7 +68,7 @@ public class ObjectReflection {
 				setterMethod.invoke(delegate, value);
 			}catch(NoSuchMethodException e){
 				//Do nothing, skip to attempt direct field access
-				LOG.log(Level.WARNING, String.format("No Setter for non accessable field %s. Attempting direct field access",fld.getName()));
+				LOG.warn(String.format("No Setter for non accessable field %s. Attempting direct field access",fld.getName()));
 			}catch(Exception e){
 				throw new ReflectionException(makeErrorMessage("Unable to invoke setter on field", fld));
 			}
@@ -102,7 +103,7 @@ public class ObjectReflection {
 				return getterMethod.invoke(delegate);
 			}catch(NoSuchMethodException e){
 				//Do nothing, skip to attempt direct field access
-				LOG.log(Level.WARNING, "No getter for non accessable field. Attempting direct field access");
+				LOG.warn("No getter for non accessable field. Attempting direct field access");
 			}catch(Exception e){
 				throw new ReflectionException(makeErrorMessage("Unable to invoke getter on field", fld));
 			}
