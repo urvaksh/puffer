@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.codeaspect.puffer.annotations.PacketMessage;
 import com.codeaspect.puffer.annotations.TemporalFormat;
+import com.codeaspect.puffer.converters.AnnotationBasedDateConverter;
 import com.codeaspect.puffer.testutils.TestUtils;
 
 public class SimplePacketTest {
