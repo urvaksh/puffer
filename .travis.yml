@@ -1,2 +1,2 @@
 language: java
-script: "mvn install -f./puffer/pom.xml"
+script: "mvn package -f./puffer/pom.xml"
