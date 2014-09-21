@@ -1,6 +1,10 @@
 package com.codeaspect.puffer.enums;
 
 public enum NumericSign {
+	
+	/**
+	 * There is no sign, numbers are assumed to always be positive
+	 */
 	NONE(0) {
 
 		@Override
@@ -21,6 +25,9 @@ public enum NumericSign {
 
 	},
 	
+	/**
+	 * Negitave numbers have the - sign ahead of them. Negitave numbers are represented as -123, positive as 123
+	 */
 	DEFAULT(0){
 
 		@Override
@@ -30,7 +37,7 @@ public enum NumericSign {
 
 		@Override
 		public boolean isNegitave(String text) {
-			return false;
+			return text.startsWith("-");
 		}
 
 		@Override
@@ -45,6 +52,9 @@ public enum NumericSign {
 		}
 	},
 	
+	/**
+	 * The sign is always present. Negitave numbers are represented as -123, positive as +123
+	 */
 	REQUIRED(1){
 
 		@Override
@@ -65,6 +75,9 @@ public enum NumericSign {
 		
 	},
 	
+	/**
+	 * Negitave numbers are represented as [123] positive as 123
+	 */
 	BRACKET_NOTATION(2){
 
 		@Override
