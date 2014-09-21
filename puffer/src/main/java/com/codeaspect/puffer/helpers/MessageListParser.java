@@ -20,7 +20,7 @@ public class MessageListParser {
 	private String packet;
 	private List<Field> fields;
 	private ObjectReflection reflection;
-	private int currentLocation;
+	private volatile int currentLocation;
 
 	public MessageListParser(AbstractPacket baseObject, String packet) {
 		super();
@@ -116,17 +116,18 @@ public class MessageListParser {
 			int listSize = findListCount(fld, start);
 			int packetLength = findPacketLength(fld);
 			List<T> lst = new ArrayList<T>();
-			this.currentLocation=start;
+			int location=start;
+			//this.currentLocation=start;
 			
 			for(int listIndex=0; listIndex<listSize; listIndex++){
-				String packetStringValue = packet.substring(currentLocation, currentLocation+packetLength);
+				String packetStringValue = packet.substring(location, location+packetLength);
 				Class<T> listItemClass = getListItemClass(fld);
 				T listItem = AbstractPacket.parse(listItemClass, packetStringValue);
 				
-				this.currentLocation+=packetLength;
+				location+=packetLength;
 				lst.add(listItem);
 			}
-			
+			currentLocation=location;
 			return lst;
 		}
 	}
