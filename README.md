@@ -1,4 +1,4 @@
-[pUFFEr](http://projects.codeaspect.com/#/puffer/intro)
+pUFFEr
 ======
 
 
