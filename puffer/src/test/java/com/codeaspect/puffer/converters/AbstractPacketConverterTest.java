@@ -1,14 +1,13 @@
 package com.codeaspect.puffer.converters;
 
-import java.lang.reflect.Field;
-
+import com.codeaspect.puffer.annotations.PacketMessage;
+import com.codeaspect.puffer.enums.Side;
+import com.codeaspect.puffer.packet.AbstractPacket;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.codeaspect.puffer.annotations.PacketMessage;
-import com.codeaspect.puffer.enums.Side;
-import com.codeaspect.puffer.packet.AbstractPacket;
+import java.lang.reflect.Field;
 
 public class AbstractPacketConverterTest {
 	

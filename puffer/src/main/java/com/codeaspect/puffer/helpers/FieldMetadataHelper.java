@@ -1,17 +1,16 @@
 package com.codeaspect.puffer.helpers;
 
+import com.codeaspect.puffer.annotations.PacketMessage;
+import com.codeaspect.puffer.cache.Cache;
+import com.codeaspect.puffer.cache.MapFieldCache;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Predicate;
-
-import com.codeaspect.puffer.annotations.PacketMessage;
-import com.codeaspect.puffer.cache.Cache;
-import com.codeaspect.puffer.cache.MapFieldCache;
 
 /**
  * The Class FieldMetadataHelper is a helper that other classes use to get Field Metadata.

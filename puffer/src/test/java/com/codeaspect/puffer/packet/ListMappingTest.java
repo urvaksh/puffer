@@ -1,13 +1,12 @@
 package com.codeaspect.puffer.packet;
 
-import static junit.framework.Assert.assertEquals;
+import com.codeaspect.puffer.annotations.PacketList;
+import com.codeaspect.puffer.annotations.PacketMessage;
+import org.junit.Test;
 
 import java.util.List;
 
-import org.junit.Test;
-
-import com.codeaspect.puffer.annotations.PacketList;
-import com.codeaspect.puffer.annotations.PacketMessage;
+import static junit.framework.Assert.assertEquals;
 
 public class ListMappingTest {
 

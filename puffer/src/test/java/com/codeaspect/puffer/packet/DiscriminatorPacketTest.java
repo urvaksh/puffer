@@ -1,22 +1,16 @@
 package com.codeaspect.puffer.packet;
 
-import static junit.framework.Assert.assertEquals;
+import com.codeaspect.puffer.annotations.*;
+import com.codeaspect.puffer.cache.MapCache;
+import com.codeaspect.puffer.cache.MapFieldCache;
+import com.codeaspect.puffer.helpers.CacheSettings;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
-import com.codeaspect.puffer.annotations.BooleanFormat;
-import com.codeaspect.puffer.annotations.DiscriminatorField;
-import com.codeaspect.puffer.annotations.DiscriminatorValue;
-import com.codeaspect.puffer.annotations.Packet;
-import com.codeaspect.puffer.annotations.PacketMessage;
-import com.codeaspect.puffer.annotations.TemporalFormat;
-import com.codeaspect.puffer.cache.MapCache;
-import com.codeaspect.puffer.cache.MapFieldCache;
-import com.codeaspect.puffer.helpers.CacheSettings;
+import static junit.framework.Assert.assertEquals;
 
 public class DiscriminatorPacketTest {
 	

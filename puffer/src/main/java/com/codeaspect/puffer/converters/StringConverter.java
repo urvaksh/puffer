@@ -5,11 +5,10 @@
  */
 package com.codeaspect.puffer.converters;
 
-import java.lang.reflect.Field;
-
+import com.codeaspect.puffer.annotations.PacketMessage;
 import org.apache.commons.lang.StringUtils;
 
-import com.codeaspect.puffer.annotations.PacketMessage;
+import java.lang.reflect.Field;
 
 /**
  * The Class StringConverter converts from a String to a String - as is.<br />

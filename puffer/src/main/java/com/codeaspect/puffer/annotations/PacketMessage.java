@@ -5,15 +5,15 @@
  */
 package com.codeaspect.puffer.annotations;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
 import com.codeaspect.puffer.converters.Converter;
 import com.codeaspect.puffer.converters.DefaultConverter;
 import com.codeaspect.puffer.enums.NumericSign;
 import com.codeaspect.puffer.enums.Side;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * The Annotation PacketMessage allows specification of the Mapping metadata for the Packet.
@@ -50,6 +50,12 @@ public @interface PacketMessage {
 	 * Defaults to right padding
 	 */
 	public Side paddingSide() default Side.RIGHT;
+
+	/**
+	 * Trim the packet data using the padding character.
+	 * Defaults to false.
+     */
+	public boolean trim() default false;
 
 	/**
 	 * The {@link com.codeaspect.puffer.converters.Converter} class to convert the value from a String to the datataype

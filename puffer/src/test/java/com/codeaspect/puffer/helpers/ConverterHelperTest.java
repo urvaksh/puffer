@@ -1,14 +1,5 @@
 package com.codeaspect.puffer.helpers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.lang.reflect.Field;
-import java.util.Calendar;
-import java.util.Date;
-
-import org.junit.Test;
-
 import com.codeaspect.puffer.annotations.PacketMessage;
 import com.codeaspect.puffer.annotations.TemporalFormat;
 import com.codeaspect.puffer.converters.CharacterConverter;
@@ -17,6 +8,13 @@ import com.codeaspect.puffer.converters.SingeltonConverter;
 import com.codeaspect.puffer.enums.NumericSign;
 import com.codeaspect.puffer.enums.Side;
 import com.codeaspect.puffer.testutils.TestUtils;
+import org.junit.Test;
+
+import java.lang.reflect.Field;
+import java.util.Date;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ConverterHelperTest {
 
@@ -75,6 +73,14 @@ public class ConverterHelperTest {
 	}
 
 
+	@Test
+	public void testHydrate_StringTrim() throws NoSuchFieldException, SecurityException {
+		Field field = TestClass.class.getDeclaredField("str");
+		String value = (String) ConverterHelper.hydrate(field, "  abcd  ");
+		assertEquals("abcd", value);
+	}
+
+
 	private static class TestClass {
 		@PacketMessage(position = 1, length = 10, numericSign = NumericSign.DEFAULT, padChar = '0', paddingSide = Side.LEFT)
 		Long amount;
@@ -82,6 +88,9 @@ public class ConverterHelperTest {
 		@PacketMessage(position = 2, length = 8)
 		@TemporalFormat("ddMMyyyy")
 		Date date;
+
+		@PacketMessage(position = 3, length = 8, trim=true)
+		String str;
 	}
 
 }

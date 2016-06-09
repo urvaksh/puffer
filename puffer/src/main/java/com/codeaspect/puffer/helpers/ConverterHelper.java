@@ -1,13 +1,13 @@
 package com.codeaspect.puffer.helpers;
 
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.codeaspect.puffer.annotations.PacketMessage;
 import com.codeaspect.puffer.converters.Converter;
 import com.codeaspect.puffer.converters.SingeltonConverter;
 import com.codeaspect.puffer.exceptions.PufferException;
+
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ConverterHelper {
 	
@@ -38,7 +38,12 @@ public class ConverterHelper {
 		if(msg.numericSign().isNegitave(fieldValue)){
 			value="-"+value;
 		}
-		return ConverterHelper.getConverter(msg.converter()).hydrate(field, fieldValue);
+
+		Object convertedValue = ConverterHelper.getConverter(msg.converter()).hydrate(field, fieldValue);
+		if(msg.trim() && convertedValue instanceof String){
+			convertedValue=convertedValue.toString().trim();
+		}
+		return convertedValue;
 	}
 	
 	public static String stringifyAndPad(Field field, Object value){

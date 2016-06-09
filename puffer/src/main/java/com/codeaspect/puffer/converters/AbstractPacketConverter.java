@@ -5,9 +5,9 @@
  */
 package com.codeaspect.puffer.converters;
 
-import java.lang.reflect.Field;
-
 import com.codeaspect.puffer.packet.AbstractPacket;
+
+import java.lang.reflect.Field;
 
 /**
  * The Class AbstractPacketConverter is a {@link com.codeaspect.puffer.converters.Converter} for {@link com.codeaspect.puffer.packet.AbstractPacket}<i>s</i><br />.

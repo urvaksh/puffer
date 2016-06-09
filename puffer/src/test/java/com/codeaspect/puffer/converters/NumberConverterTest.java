@@ -1,12 +1,12 @@
 package com.codeaspect.puffer.converters;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class NumberConverterTest {
 

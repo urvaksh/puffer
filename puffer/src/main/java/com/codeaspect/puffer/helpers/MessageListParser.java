@@ -1,18 +1,17 @@
 package com.codeaspect.puffer.helpers;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Predicate;
-import org.apache.commons.lang.StringUtils;
-
 import com.codeaspect.puffer.annotations.PacketList;
 import com.codeaspect.puffer.annotations.PacketMessage;
 import com.codeaspect.puffer.exceptions.PufferException;
 import com.codeaspect.puffer.packet.AbstractPacket;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
+import org.apache.commons.lang.StringUtils;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MessageListParser {
 

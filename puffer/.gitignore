@@ -1,4 +1,6 @@
-
+#Idea Files
+.idea
+*.iml
 
 #Eclipse Files
 .classpath

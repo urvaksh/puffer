@@ -1,12 +1,11 @@
 package com.codeaspect.puffer.helpers;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
+import com.codeaspect.puffer.annotations.PacketMessage;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.codeaspect.puffer.annotations.PacketMessage;
+import java.lang.reflect.Field;
+import java.util.List;
 
 public class FieldMetadataHelperTest {
 	

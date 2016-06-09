@@ -5,12 +5,12 @@
  */
 package com.codeaspect.puffer.annotations;
 
+import com.codeaspect.puffer.packet.AbstractPacket;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
-import com.codeaspect.puffer.packet.AbstractPacket;
 
 /**
  * The Annotation DiscriminatorValue allows specification of which values should map to which target classes.

@@ -5,16 +5,15 @@
  */
 package com.codeaspect.puffer.converters;
 
+import com.codeaspect.puffer.annotations.TemporalFormat;
+import com.codeaspect.puffer.exceptions.PufferException;
+import org.apache.commons.lang.StringUtils;
+
 import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.apache.commons.lang.StringUtils;
-
-import com.codeaspect.puffer.annotations.TemporalFormat;
-import com.codeaspect.puffer.exceptions.PufferException;
 
 /**
  * The Class AnnotationBasedDateConverter is a {@link com.codeaspect.puffer.converters.Converter<Date>} that converts between Strings and Dates.<br />
