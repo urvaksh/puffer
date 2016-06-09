@@ -5,9 +5,9 @@
  */
 package com.codeaspect.puffer.converters;
 
-import java.lang.reflect.Field;
-
 import com.codeaspect.puffer.annotations.BooleanFormat;
+
+import java.lang.reflect.Field;
 
 /**
  * The Class BooleanConverter is a {@link com.codeaspect.puffer.converters.Converter} that converts between Strings and Boolean.<br />.

@@ -5,11 +5,11 @@
  */
 package com.codeaspect.puffer.helpers;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
 import com.codeaspect.puffer.cache.Cache;
 import com.codeaspect.puffer.packet.AbstractPacket;
+
+import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * The Class CacheSettings.

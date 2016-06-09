@@ -1,9 +1,5 @@
 package com.codeaspect.puffer.helpers;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
-
 import com.codeaspect.puffer.annotations.DiscriminatorField;
 import com.codeaspect.puffer.annotations.DiscriminatorValue;
 import com.codeaspect.puffer.annotations.PacketList;
@@ -12,6 +8,10 @@ import com.codeaspect.puffer.cache.Cache;
 import com.codeaspect.puffer.cache.MapCache;
 import com.codeaspect.puffer.exceptions.PufferException;
 import com.codeaspect.puffer.packet.AbstractPacket;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
 
 public class DiscriminatorHelper {
 

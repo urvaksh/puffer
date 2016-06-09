@@ -1,15 +1,9 @@
 package com.codeaspect.puffer.packet;
 
-import static junit.framework.Assert.assertEquals;
-
-import java.util.List;
-
+import com.codeaspect.puffer.annotations.PacketMessage;
 import org.junit.Test;
 
-import com.codeaspect.puffer.annotations.PacketList;
-import com.codeaspect.puffer.annotations.PacketMessage;
-import com.codeaspect.puffer.packet.ListMappingTest.InnerMessage;
-import com.codeaspect.puffer.packet.ListMappingTest.Message;
+import static junit.framework.Assert.assertEquals;
 
 public class ComponentMappingTest {
 	

@@ -1,18 +1,15 @@
 package com.codeaspect.puffer.converters;
 
-import java.lang.reflect.Field;
-import java.util.Calendar;
-import java.util.Date;
-
-import junit.framework.Assert;
-
-import org.junit.Ignore;
-import org.junit.Test;
-
 import com.codeaspect.puffer.annotations.PacketMessage;
 import com.codeaspect.puffer.annotations.TemporalFormat;
 import com.codeaspect.puffer.packet.AbstractPacket;
 import com.codeaspect.puffer.testutils.TestUtils;
+import junit.framework.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import java.lang.reflect.Field;
+import java.util.Date;
 
 public class AnnotationBasedDateConverterTest {
 	

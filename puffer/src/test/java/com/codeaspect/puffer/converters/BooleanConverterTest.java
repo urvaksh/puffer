@@ -1,15 +1,14 @@
 package com.codeaspect.puffer.converters;
 
-import static junit.framework.Assert.assertEquals;
-
-import java.lang.reflect.Field;
-
-import org.junit.Ignore;
-import org.junit.Test;
-
 import com.codeaspect.puffer.annotations.BooleanFormat;
 import com.codeaspect.puffer.annotations.PacketMessage;
 import com.codeaspect.puffer.packet.AbstractPacket;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import java.lang.reflect.Field;
+
+import static junit.framework.Assert.assertEquals;
 
 public class BooleanConverterTest {
 	

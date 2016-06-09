@@ -1,16 +1,14 @@
 package com.codeaspect.puffer.packet;
 
-import java.util.Date;
-
-import static junit.framework.Assert.*;
-
+import com.codeaspect.puffer.annotations.PacketMessage;
+import com.codeaspect.puffer.annotations.TemporalFormat;
+import com.codeaspect.puffer.testutils.TestUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.codeaspect.puffer.annotations.PacketMessage;
-import com.codeaspect.puffer.annotations.TemporalFormat;
-import com.codeaspect.puffer.converters.AnnotationBasedDateConverter;
-import com.codeaspect.puffer.testutils.TestUtils;
+import java.util.Date;
+
+import static junit.framework.Assert.*;
 
 public class SimplePacketTest {
 

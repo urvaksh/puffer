@@ -1,13 +1,12 @@
 package com.codeaspect.puffer.converters;
 
-import static org.junit.Assert.assertEquals;
-
-import java.lang.reflect.Field;
-
+import com.codeaspect.puffer.annotations.PacketMessage;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.codeaspect.puffer.annotations.PacketMessage;
+import java.lang.reflect.Field;
+
+import static org.junit.Assert.assertEquals;
 
 public class StringConverterTest {
 

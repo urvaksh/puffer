@@ -5,19 +5,14 @@
  */
 package com.codeaspect.puffer.packet;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
+import com.codeaspect.puffer.annotations.PacketList;
+import com.codeaspect.puffer.annotations.PacketMessage;
+import com.codeaspect.puffer.helpers.*;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import com.codeaspect.puffer.annotations.PacketList;
-import com.codeaspect.puffer.annotations.PacketMessage;
-import com.codeaspect.puffer.helpers.ConverterHelper;
-import com.codeaspect.puffer.helpers.DiscriminatorHelper;
-import com.codeaspect.puffer.helpers.FieldMetadataHelper;
-import com.codeaspect.puffer.helpers.MessageListParser;
-import com.codeaspect.puffer.helpers.ObjectReflection;
+import java.lang.reflect.Field;
+import java.util.List;
 
 public abstract class AbstractPacket {
 

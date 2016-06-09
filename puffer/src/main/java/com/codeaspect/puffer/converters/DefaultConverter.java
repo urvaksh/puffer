@@ -5,13 +5,13 @@
  */
 package com.codeaspect.puffer.converters;
 
+import com.codeaspect.puffer.exceptions.PufferException;
+import com.codeaspect.puffer.packet.AbstractPacket;
+
 import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.codeaspect.puffer.exceptions.PufferException;
-import com.codeaspect.puffer.packet.AbstractPacket;
 
 /**
  * The Class DefaultConverter as its name suggests is the Default implementation of the

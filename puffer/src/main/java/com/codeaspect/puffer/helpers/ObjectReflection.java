@@ -5,14 +5,13 @@
  */
 package com.codeaspect.puffer.helpers;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
+import com.codeaspect.puffer.exceptions.ReflectionException;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.codeaspect.puffer.exceptions.ReflectionException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * The Class ObjectReflection provides an easy way to perform reflective calls on onjects.
