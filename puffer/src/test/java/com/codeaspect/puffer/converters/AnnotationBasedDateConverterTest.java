@@ -2,7 +2,7 @@ package com.codeaspect.puffer.converters;
 
 import com.codeaspect.puffer.annotations.PacketMessage;
 import com.codeaspect.puffer.annotations.TemporalFormat;
-import com.codeaspect.puffer.packet.AbstractPacket;
+import com.codeaspect.puffer.packet.Packet;
 import com.codeaspect.puffer.testutils.TestUtils;
 import junit.framework.Assert;
 import org.junit.Ignore;
@@ -14,7 +14,7 @@ import java.util.Date;
 public class AnnotationBasedDateConverterTest {
 	
 	@Ignore
-	public static class TestPacket extends AbstractPacket {
+	public static class TestPacket implements Packet {
 		@PacketMessage(position=1, length=7)
 		@TemporalFormat("dd-MM-yyyy")
 		public Date date;

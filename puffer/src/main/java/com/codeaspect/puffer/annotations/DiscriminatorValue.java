@@ -5,7 +5,7 @@
  */
 package com.codeaspect.puffer.annotations;
 
-import com.codeaspect.puffer.packet.AbstractPacket;
+import com.codeaspect.puffer.packet.Packet;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -27,5 +27,5 @@ public @interface DiscriminatorValue {
 	/**
 	 * The target class if any of the values match.
 	 */
-	public Class<? extends AbstractPacket> targetClass();
+	public Class<? extends Packet> targetClass();
 }

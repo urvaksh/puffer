@@ -2,17 +2,17 @@ package com.codeaspect.puffer.converters;
 
 import com.codeaspect.puffer.annotations.PacketMessage;
 import com.codeaspect.puffer.enums.Side;
-import com.codeaspect.puffer.packet.AbstractPacket;
+import com.codeaspect.puffer.packet.Packet;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
 
-public class AbstractPacketConverterTest {
+public class PacketConverterTest {
 	
 	@Ignore
-	public static class TestPacket extends AbstractPacket {
+	public static class TestPacket implements Packet {
 		@PacketMessage(position=1, length=7)
 		public String field1;
 		
@@ -21,7 +21,7 @@ public class AbstractPacketConverterTest {
 	};
 	
 	@Ignore
-	public static class TestOuterPacket extends AbstractPacket {
+	public static class TestOuterPacket implements Packet {
 		@PacketMessage(position=1, length=7)
 		public TestPacket packet;
 	};

@@ -7,7 +7,7 @@ import static junit.framework.Assert.assertEquals;
 
 public class ComponentMappingTest {
 	
-	public static class Message extends AbstractPacket {
+	public static class Message implements Packet {
 
 		@PacketMessage(length = 10, position = 1)
 		String details;
@@ -16,7 +16,7 @@ public class ComponentMappingTest {
 		InnerMessage messages;
 	}
 
-	public static class InnerMessage extends AbstractPacket {
+	public static class InnerMessage implements Packet {
 
 		@PacketMessage(length = 1, position = 1)
 		private String identifier;
@@ -27,7 +27,7 @@ public class ComponentMappingTest {
 	
 	@Test
 	public void testMapping() {
-		Message msg = AbstractPacket.parse(Message.class, "0123456789AXXXXX");
+		Message msg = Packet.parse(Message.class, "0123456789AXXXXX");
 		assertEquals("0123456789", msg.details);
 		assertEquals("A", msg.messages.identifier);
 		assertEquals("XXXXX", msg.messages.name);
