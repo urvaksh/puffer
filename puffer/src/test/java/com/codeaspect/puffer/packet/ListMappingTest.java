@@ -10,7 +10,7 @@ import static junit.framework.Assert.assertEquals;
 
 public class ListMappingTest {
 
-	public static class Message extends AbstractPacket {
+	public static class Message implements Packet {
 
 		@PacketMessage(length = 10, position = 1)
 		String details;
@@ -20,7 +20,7 @@ public class ListMappingTest {
 		List<InnerMessage> messages;
 	}
 
-	public static class InnerMessage extends AbstractPacket {
+	public static class InnerMessage implements Packet {
 
 		@PacketMessage(length = 1, position = 1)
 		private String identifier;
@@ -31,7 +31,7 @@ public class ListMappingTest {
 
 	@Test
 	public void testMapping() {
-		Message msg = AbstractPacket.parse(Message.class, "0123456789AXXXXXBYYYYY");
+		Message msg = Packet.parse(Message.class, "0123456789AXXXXXBYYYYY");
 		assertEquals("0123456789", msg.details);
 		assertEquals(2, msg.messages.size());
 		assertEquals("A", msg.messages.get(0).identifier);

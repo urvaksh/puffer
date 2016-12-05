@@ -3,7 +3,7 @@ package com.codeaspect.puffer.helpers;
 import com.codeaspect.puffer.annotations.PacketList;
 import com.codeaspect.puffer.annotations.PacketMessage;
 import com.codeaspect.puffer.exceptions.PufferException;
-import com.codeaspect.puffer.packet.AbstractPacket;
+import com.codeaspect.puffer.packet.Packet;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.lang.StringUtils;
@@ -15,13 +15,13 @@ import java.util.List;
 
 public class MessageListParser {
 
-	private AbstractPacket baseObject;
+	private Packet baseObject;
 	private String packet;
 	private List<Field> fields;
 	private ObjectReflection reflection;
 	private volatile int currentLocation;
 
-	public MessageListParser(AbstractPacket baseObject, String packet) {
+	public MessageListParser(Packet baseObject, String packet) {
 		super();
 		this.baseObject = baseObject;
 		this.packet = packet;
@@ -97,7 +97,7 @@ public class MessageListParser {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected <T extends AbstractPacket> Class<T> getListItemClass(Field fld){
+	protected <T extends Packet> Class<T> getListItemClass(Field fld){
 		try{
 			if(fld.getGenericType() instanceof ParameterizedType){
 				ParameterizedType pt = (ParameterizedType) fld.getGenericType();
@@ -110,7 +110,7 @@ public class MessageListParser {
 		}
 	}
 	
-	public <T extends AbstractPacket> List<T> parseList(Field fld, int start){
+	public <T extends Packet> List<T> parseList(Field fld, int start){
 		synchronized(baseObject){
 			int listSize = findListCount(fld, start);
 			int packetLength = findPacketLength(fld);
@@ -121,7 +121,7 @@ public class MessageListParser {
 			for(int listIndex=0; listIndex<listSize; listIndex++){
 				String packetStringValue = packet.substring(location, location+packetLength);
 				Class<T> listItemClass = getListItemClass(fld);
-				T listItem = AbstractPacket.parse(listItemClass, packetStringValue);
+				T listItem = Packet.parse(listItemClass, packetStringValue);
 				
 				location+=packetLength;
 				lst.add(listItem);

@@ -6,7 +6,7 @@
 package com.codeaspect.puffer.converters;
 
 import com.codeaspect.puffer.exceptions.PufferException;
-import com.codeaspect.puffer.packet.AbstractPacket;
+import com.codeaspect.puffer.packet.Packet;
 
 import java.lang.reflect.Field;
 import java.util.Date;
@@ -28,7 +28,7 @@ public class DefaultConverter implements SingeltonConverter<Object> {
 		converters.put(String.class, new StringConverter());
 		converters.put(Date.class, new AnnotationBasedDateConverter());
 		converters.put(Boolean.class, new BooleanConverter());
-		converters.put(AbstractPacket.class, new AbstractPacketConverter());
+		converters.put(Packet.class, new AbstractPacketConverter());
 	}
 
 	/**
@@ -40,14 +40,14 @@ public class DefaultConverter implements SingeltonConverter<Object> {
 	 */
 	@SuppressWarnings("unchecked")
 	private Converter<Object> getConverter(Class<?> clazz) {
-		Class<?> superClazz = clazz;
-		while (superClazz != null) {
-			if (converters.containsKey(superClazz))
-				return (Converter<Object>) converters.get(superClazz);
-			superClazz = superClazz.getSuperclass();
-		}
-		throw new PufferException(String.format("Unable to convert the field %s, please use a Custom Converter",
-				clazz.getCanonicalName()));
+
+		return converters.entrySet()
+				.stream()
+				.filter(entry->entry.getKey().isAssignableFrom(clazz))
+				.map(Map.Entry::getValue)
+				.map(Converter.class::cast)
+				.findAny()
+				.orElseThrow(()->new PufferException(String.format("Unable to convert the field %s, please use a Custom Converter",  clazz.getCanonicalName())));
 	}
 
 	/*

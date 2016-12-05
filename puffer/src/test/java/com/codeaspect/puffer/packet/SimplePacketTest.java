@@ -13,7 +13,7 @@ import static junit.framework.Assert.*;
 public class SimplePacketTest {
 
 	@Ignore
-	public static class OrderDetail extends AbstractPacket {
+	public static class OrderDetail implements Packet {
 
 		@PacketMessage(position = 1, length = 10)
 		private String name;
@@ -29,7 +29,7 @@ public class SimplePacketTest {
 	@Test
 	public void testMapping(){
 		String message = "Item1     1508201300100";
-		OrderDetail detail = AbstractPacket.parse(OrderDetail.class, message);
+		OrderDetail detail = Packet.parse(OrderDetail.class, message);
 		assertEquals("Item1", detail.name.trim());
 		assertEquals(TestUtils.createDate(15, 8, 2013), detail.date);
 		assertEquals(new Long(100), detail.amount);

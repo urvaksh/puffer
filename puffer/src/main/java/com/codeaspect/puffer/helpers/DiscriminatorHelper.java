@@ -7,7 +7,7 @@ import com.codeaspect.puffer.annotations.PacketMessage;
 import com.codeaspect.puffer.cache.Cache;
 import com.codeaspect.puffer.cache.MapCache;
 import com.codeaspect.puffer.exceptions.PufferException;
-import com.codeaspect.puffer.packet.AbstractPacket;
+import com.codeaspect.puffer.packet.Packet;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -17,9 +17,9 @@ public class DiscriminatorHelper {
 
 	private static Cache<String, FieldLocation> discriminatorFieldCache = new MapCache<String, DiscriminatorHelper.FieldLocation>();
 
-	private static Cache<Class<? extends AbstractPacket>, Integer> packetSize = new MapCache<Class<? extends AbstractPacket>, Integer>();
+	private static Cache<Class<? extends Packet>, Integer> packetSize = new MapCache<Class<? extends Packet>, Integer>();
 
-	public static int getPacketLength(Class<? extends AbstractPacket> clazz) {
+	public static int getPacketLength(Class<? extends Packet> clazz) {
 		
 		boolean allowCaching = true;
 		
@@ -53,7 +53,7 @@ public class DiscriminatorHelper {
 		}
 	}
 
-	public static <T extends AbstractPacket> T getConcreteObject(Class<T> clazz, String packet) {
+	public static <T extends Packet> T getConcreteObject(Class<T> clazz, String packet) {
 		try {
 			Class<T> resolvedCalzz = resolveClass(clazz, packet);
 			return resolvedCalzz.newInstance();
@@ -63,7 +63,7 @@ public class DiscriminatorHelper {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T extends AbstractPacket> Class<T> resolveClass(Class<T> clazz, String packet) {
+	public static <T extends Packet> Class<T> resolveClass(Class<T> clazz, String packet) {
 		if (clazz.isAnnotationPresent(DiscriminatorField.class)) {
 			DiscriminatorField discFld = clazz.getAnnotation(DiscriminatorField.class);
 
@@ -126,7 +126,7 @@ public class DiscriminatorHelper {
 		DiscriminatorHelper.discriminatorFieldCache = (Cache<String, FieldLocation>) discriminatorFieldCache;
 	}
 
-	static void setPacketSize(Cache<Class<? extends AbstractPacket>, Integer> packetSize) {
+	static void setPacketSize(Cache<Class<? extends Packet>, Integer> packetSize) {
 		DiscriminatorHelper.packetSize = packetSize;
 	}
 

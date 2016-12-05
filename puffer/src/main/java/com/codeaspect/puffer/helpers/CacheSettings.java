@@ -6,7 +6,7 @@
 package com.codeaspect.puffer.helpers;
 
 import com.codeaspect.puffer.cache.Cache;
-import com.codeaspect.puffer.packet.AbstractPacket;
+import com.codeaspect.puffer.packet.Packet;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
 public class CacheSettings {
 
 	/**
-	 * Sets the field cache used to cache the list of mapped fields in an {@link com.codeaspect.puffer.packet.AbstractPacket}.
+	 * Sets the field cache used to cache the list of mapped fields in an {@link Packet}.
 	 *
 	 * @param fieldCache the field cache
 	 */
@@ -40,7 +40,7 @@ public class CacheSettings {
 	 * @param packetSize the packet size
 	 */
 	public static void setPacketSizeCache(
-			Cache<Class<? extends AbstractPacket>, Integer> packetSize) {
+			Cache<Class<? extends Packet>, Integer> packetSize) {
 		DiscriminatorHelper.setPacketSize(packetSize);
 	}
 }

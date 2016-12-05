@@ -17,15 +17,15 @@ public class DiscriminatorPacketTest {
 	static{
 		CacheSettings.setFieldCache(MapFieldCache.getInstance());
 		CacheSettings.setDiscriminatorFieldCache(new MapCache<String, Object>());
-		CacheSettings.setPacketSizeCache(new MapCache<Class<? extends AbstractPacket>, Integer>());
+		CacheSettings.setPacketSizeCache(new MapCache<Class<? extends Packet>, Integer>());
 	}
 
 	@Ignore
-	@Packet(description = "Packet to test Discriminators")
+	@com.codeaspect.puffer.annotations.Packet(description = "Packet to test Discriminators")
 	@DiscriminatorField(fieldName = "fld1", 
 		values = { @DiscriminatorValue(fieldValues = {"ABC", "abc" }, targetClass = Derived1.class),
 					@DiscriminatorValue(fieldValues = {"XYZ", "xyz" }, targetClass = Middle.class)})
-	public static abstract class Base extends AbstractPacket {
+	public static abstract class Base implements Packet {
 		@PacketMessage(length = 4, position = 1)
 		String dummy;
 
@@ -86,7 +86,7 @@ public class DiscriminatorPacketTest {
 	@Test
 	public void testDerived1(){
 		String input = "----ABCY2014-08-15";
-		AbstractPacket packet= AbstractPacket.parse(Base.class, input);
+		Packet packet= Packet.parse(Base.class, input);
 		
 		assertEquals(Derived1.class, packet.getClass());
 		
@@ -102,7 +102,7 @@ public class DiscriminatorPacketTest {
 	@Test
 	public void testRederived(){
 		String input = "----xyzNABC00500";
-		AbstractPacket packet= AbstractPacket.parse(Base.class, input);
+		Packet packet= Packet.parse(Base.class, input);
 		
 		assertEquals(ReDerived.class, packet.getClass());
 		
@@ -119,7 +119,7 @@ public class DiscriminatorPacketTest {
 	@Test
 	public void testRederived2(){
 		String input = "----xyzNXYZFive Hundred   ";
-		AbstractPacket packet= AbstractPacket.parse(Base.class, input);
+		Packet packet= Packet.parse(Base.class, input);
 		
 		assertEquals(ReDerived2.class, packet.getClass());
 		

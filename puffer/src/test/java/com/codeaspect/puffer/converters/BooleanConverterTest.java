@@ -2,7 +2,7 @@ package com.codeaspect.puffer.converters;
 
 import com.codeaspect.puffer.annotations.BooleanFormat;
 import com.codeaspect.puffer.annotations.PacketMessage;
-import com.codeaspect.puffer.packet.AbstractPacket;
+import com.codeaspect.puffer.packet.Packet;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ import static junit.framework.Assert.assertEquals;
 public class BooleanConverterTest {
 	
 	@Ignore
-	public static class TestPacket extends AbstractPacket {
+	public static class TestPacket implements Packet {
 		@PacketMessage(position=1, length=1)
 		@BooleanFormat(defaultValue=false, trueValue="Y", falseValue="N")
 		public Boolean bool;
