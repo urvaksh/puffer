@@ -21,15 +21,15 @@ Simple Example
 For the class:
 
 ```Java
-class OrderDetail extends AbstractPacket{
+class OrderDetail implements Packet{
 
 	@PacketMessage(position=1, length=5)
 	private String name;
-	
+
 	@PacketMessage(position=2, length=8)
 	@TemporalFormat("ddMMyyyy")
 	private Date date;
-	
+
 	@PacketMessage(position=3, length=5)
 	private Long amount;
 }
@@ -47,7 +47,7 @@ OrderDetail detail = new OrderDetail();
 detail.parse(message);
 
 //Method 2: Allowing the framework to create the object (class must have zero-arg constructor)
-OrderDetail detail = AbstractPacket.parse(OrderDetail.class, message);
+OrderDetail detail = Packet.parse(OrderDetail.class, message);
 ```
 
 Custom Converters
@@ -62,14 +62,14 @@ public class AmountConverter implements Converter<Double> {
 
 	//Provided by framework
 	private Converter<Number> delegate = new NumberConverter();
-	
+
 	@Override
 	public Double hydrate(Field field, String message) {
 		//Cast to Double since the field object identifies it as a Double
 		Double value = (Double)delegate.hydrate(field,message);
 		return value/100; //Divide by hundred to move the decimal
 	}
-	
+
 	@Override
 	public String stringify(Field field, Double entity) {
 		return delegate.stringify(field, entity*100);
@@ -80,18 +80,18 @@ public class AmountConverter implements Converter<Double> {
 and now in the class:
 
 ```Java
-class OrderDetail extends AbstractPacket{
+class OrderDetail implements Packet{
 
 	@PacketMessage(position=1, length=10)
 	private String name;
-	
+
 	@PacketMessage(position=2, length=8)
 	@TemporalFormat("ddMMyyyy")
 	private Date date;
-	
+
 	@PacketMessage(position=3, length=5, converter=AmountConverter.class)
 	private Double amount;
-	
+
 }
 ```
 
@@ -100,44 +100,44 @@ Component and List Mapping
 Puffer also maps One-to-One and One-to-Many relationships in fixed messages. The restriction being that all mapped classes using the pUFFEr annotations should inherit from AbstractPacket.
 
 ```Java
-public class InnerMessage extends AbstractPacket {
+public class InnerMessage implements Packet {
 
 	@PacketMessage(length = 1, position = 1)
 	private String identifier;
 
 	@PacketMessage(length = 5, position = 2)
 	private String name;
-	
+
 }
 ```
 
 ```Java
-public class ComponentMessage extends AbstractPacket {
+public class ComponentMessage implements Packet {
 
 	@PacketMessage(length = 3, position = 1)
 	private String identifier;
 
 	@PacketMessage(length = 5, position = 2)
 	private Long amount;
-	
+
 }
 ```
 
 ```Java
-public class Message extends AbstractPacket {
+public class Message implements Packet {
 
 	@PacketMessage(length = 10, position = 1)
 	String details;
-	
+
 	/*Example of Component mapping*/
-	@PacketMessage(length = 10, position = 2)	
+	@PacketMessage(length = 10, position = 2)
 	ComponentMessage component;
 
     /*Example of List mapping*/
 	@PacketMessage(length = 6, position = 3)
 	@PacketList
 	List<InnerMessage> messages;
-	
+
 }
 ```
 
@@ -149,10 +149,10 @@ The most powerful feature of puffer is the use of discriminators; it allows deve
 
 ```Java
 	@Packet(description = "Packet to test Discriminators")
-	@DiscriminatorField(fieldName = "fld1", 
+	@DiscriminatorField(fieldName = "fld1",
 		values = { @DiscriminatorValue(fieldValues = {"ABC", "abc" }, targetClass = Derived1.class),
 					@DiscriminatorValue(fieldValues = {"XYZ", "xyz" }, targetClass = Middle.class)})
-	public abstract class Base extends AbstractPacket {
+	public abstract class Base implements Packet {
 		@PacketMessage(length = 4, position = 1)
 		String dummy;
 
@@ -163,32 +163,32 @@ The most powerful feature of puffer is the use of discriminators; it allows deve
 		@BooleanFormat
 		Boolean val;
 	}
-	
-	
-	@DiscriminatorField(fieldName = "subPacket", 
+
+
+	@DiscriminatorField(fieldName = "subPacket",
 	values = { @DiscriminatorValue(fieldValues = {"ABC", "abc" }, targetClass = ReDerived.class),
 				@DiscriminatorValue(fieldValues = {"XYZ", "xyz" }, targetClass = ReDerived2.class)})
 	public class Middle extends Base{
 		@PacketMessage(length=3, position=4)
 		String subPacket;
 	}
-	
+
 	public class ReDerived extends Middle{
 		@PacketMessage(length=5, position=5)
 		Long amt;
 	}
-	
+
 	public class ReDerived2 extends Middle{
 		@PacketMessage(length=15, position=5)
 		String desc;
 	}
 ```
-	
+
 The following call will yeild an instance of ReDerived2
 
 ```Java
 String input = "----xyzNXYZFive Hundred   ";
-AbstractPacket packet= AbstractPacket.parse(Base.class, input);
+Packet packet= Packet.parse(Base.class, input);
 System.out.println(packet.getClass().getCannonicalName());//Will give the full name of ReDerived2
 ```
 
